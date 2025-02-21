@@ -1,5 +1,6 @@
 ﻿using ToDo.Server.Models;
 using ToDo.Server.Repositories.Interfaces;
+using TaskStatus = ToDo.Server.Models.TaskStatus;
 
 namespace ToDo.Server.Services;
 
@@ -23,7 +24,7 @@ public class TasksService
 
     public async Task<Tasks> GetTaskById(Guid taskId)
     {
-        var task = await _tasksRepository.GetTaskById(taskId) ?? throw new Exception("Task not found");
+        var task = await _tasksRepository.GetTaskById(taskId) ?? throw new Exception("Task not found.");
 
         return task;
     }
@@ -44,6 +45,15 @@ public class TasksService
 
         await _tasksRepository.UpdateTask(currentTask);
         return currentTask;
+    }
+
+    public async Task<Tasks> UpdateTaskStatus(Guid taskId, TaskStatus taskStatus)
+    {
+        var task = await _tasksRepository.GetTaskById(taskId) ?? throw new Exception("Task not found.");
+
+        var updatedTask = await _tasksRepository.UpdateTaskStatus(taskId, taskStatus) ?? throw new Exception("Failed to update task status.");
+
+        return updatedTask;
     }
 
     public async Task DeleteTask(Guid taskId)

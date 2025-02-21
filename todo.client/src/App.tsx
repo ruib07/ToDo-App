@@ -1,58 +1,35 @@
-import { useEffect, useState } from 'react';
-import './App.css';
+import { ToastContainer } from "react-toastify";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
-interface Forecast {
-    date: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
-}
+import Dashboard from "./pages/Dashboard";
+import NotFound from "./pages/404";
 
-function App() {
-    const [forecasts, setForecasts] = useState<Forecast[]>();
+import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
 
-    useEffect(() => {
-        populateWeatherData();
-    }, []);
+import TaskCreation from "./components/Tasks/CreateTask";
+import TaskDetails from "./components/Tasks/TaskDetails";
 
-    const contents = forecasts === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-        : <table className="table table-striped" aria-labelledby="tableLabel">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Temp. (C)</th>
-                    <th>Temp. (F)</th>
-                    <th>Summary</th>
-                </tr>
-            </thead>
-            <tbody>
-                {forecasts.map(forecast =>
-                    <tr key={forecast.date}>
-                        <td>{forecast.date}</td>
-                        <td>{forecast.temperatureC}</td>
-                        <td>{forecast.temperatureF}</td>
-                        <td>{forecast.summary}</td>
-                    </tr>
-                )}
-            </tbody>
-        </table>;
-
+export default function App() {
     return (
-        <div>
-            <h1 id="tableLabel">Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            {contents}
-        </div>
-    );
+        <Router>
+            <div className="flex flex-col min-h-screen bg-gray-100">
+                <ToastContainer />
 
-    async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        if (response.ok) {
-            const data = await response.json();
-            setForecasts(data);
-        }
-    }
+                <div className="flex-grow container mx-auto">
+                    <Routes>
+                        <Route path="/" element={<Dashboard /> } />
+                        <Route path="*" element={<NotFound />} />
+
+                        <Route path="/Authentication/Signup" element={<Signup />} />
+                        <Route path="/Authentication/Signin" element={<Signin />} />
+
+                        <Route path="/Task/Create" element={<TaskCreation />} />
+                        <Route path="/Task/:taskId" element={<TaskDetails />} />
+                    </Routes>
+                </div>
+            </div>
+        </Router>
+    )
 }
-
-export default App;

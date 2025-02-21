@@ -37,10 +37,7 @@ var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseCors(Constants.AllowLocalhost);
-app.UseDefaultFiles();
-app.MapStaticAssets();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-app.MapFallbackToFile("/index.html");
 app.Run();

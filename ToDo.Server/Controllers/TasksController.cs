@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ToDo.Server.Models;
 using ToDo.Server.Services;
+using TaskStatus = ToDo.Server.Models.TaskStatus;
 
 namespace ToDo.Server.Controllers;
 
@@ -16,6 +18,7 @@ public class TasksController : ControllerBase
     }
 
     // GET api/v1/tasks/byuser/{userId}
+    [Authorize(Policy = Constants.Constants.PolicyUser)]
     [HttpGet("byuser/{userId}")]
     public async Task<IActionResult> GetTasksByUser([FromRoute] Guid userId)
     {
@@ -25,6 +28,7 @@ public class TasksController : ControllerBase
     }
 
     // GET api/v1/tasks/{taskId}
+    [Authorize(Policy = Constants.Constants.PolicyUser)]
     [HttpGet("{taskId}")]
     public async Task<IActionResult> GetTaskById([FromRoute] Guid taskId)
     {
@@ -34,6 +38,7 @@ public class TasksController : ControllerBase
     }
 
     // POST api/v1/tasks
+    [Authorize(Policy = Constants.Constants.PolicyUser)]
     [HttpPost]
     public async Task<IActionResult> CreateTask([FromBody] Tasks task)
     {
@@ -47,6 +52,7 @@ public class TasksController : ControllerBase
     }
 
     // PUT api/v1/tasks/{taskId}
+    [Authorize(Policy = Constants.Constants.PolicyUser)]
     [HttpPut("{taskId}")]
     public async Task<IActionResult> UpdateTask([FromRoute] Guid taskId, [FromBody] Tasks updateTask)
     {
@@ -55,7 +61,22 @@ public class TasksController : ControllerBase
         return Ok("Task updated successfully!");
     }
 
+    // PATCH api/v1/tasks/{taskId}/status
+    [Authorize(Policy = Constants.Constants.PolicyUser)]
+    [HttpPatch("{taskId}/status")]
+    public async Task<ActionResult<Tasks>> UpdateTaskStatus(Guid taskId, [FromBody] TaskStatus status)
+    {
+        var updatedTask = await _tasksService.UpdateTaskStatus(taskId, status);
+
+        return Ok(new
+        {
+            Message = "Task status updated successfully.",
+            UpdatedStatus = updatedTask.Status
+        });
+    }
+
     // DELETE api/v1/tasks/{taskId}
+    [Authorize(Policy = Constants.Constants.PolicyUser)]
     [HttpDelete("{taskId}")]
     public async Task<IActionResult> DeleteTask([FromRoute] Guid taskId)
     {

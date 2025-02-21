@@ -4,9 +4,6 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <SpaRoot>..\todo.client</SpaRoot>
-    <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
-    <SpaProxyServerUrl>https://localhost:3000</SpaProxyServerUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ToDo.Server.Models;
 using ToDo.Server.Services;
 
@@ -16,6 +17,7 @@ public class UsersController : ControllerBase
     }
 
     // GET api/v1/users/{userId}
+    [Authorize(Policy = Constants.Constants.PolicyUser)]
     [HttpGet("{userId}")]
     public async Task<IActionResult> GetUserById([FromRoute] Guid userId)
     {
@@ -25,6 +27,7 @@ public class UsersController : ControllerBase
     }
 
     // PUT api/v1/users/{userId}
+    [Authorize(Policy = Constants.Constants.PolicyUser)]
     [HttpPut("{userId}")]
     public async Task<IActionResult> UpdateUser([FromRoute] Guid userId, [FromBody] Users updateUser)
     {
@@ -34,6 +37,7 @@ public class UsersController : ControllerBase
     }
 
     // DELETE api/v1/users/{userId}
+    [Authorize(Policy = Constants.Constants.PolicyUser)]
     [HttpDelete("{userId}")]
     public async Task<IActionResult> DeleteUser([FromRoute] Guid userId)
     {
