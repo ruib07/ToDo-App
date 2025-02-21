@@ -24,10 +24,9 @@ export default function TaskCreation() {
         };
 
         try {
-            const res = await CreateTask(newTask);
-            const taskId = res.data.id;
+            await CreateTask(newTask);
             showSuccessToast();
-            navigate(`/Task/${taskId}`);
+            navigate("/Tasks");
         } catch {
             showErrorToast();
         }

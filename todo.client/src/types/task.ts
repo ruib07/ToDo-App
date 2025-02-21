@@ -18,3 +18,9 @@ export interface ITask {
     status: number;
     dueDate: string;
 }
+
+export interface IDeleteTask {
+    taskId: string;
+    onClose: () => void;
+    onConfirm: () => void;
+}

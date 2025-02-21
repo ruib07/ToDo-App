@@ -65,7 +65,7 @@ export default function Header() {
             className="fixed top-0 left-0 w-full z-20 transition duration-300"
         >
             <div
-                className={`px-2 sm:px-6 lg:px-8 ${isScrolled ? "bg-gray-200 bg-opacity-90 shadow-md" : "bg-gray-300"} transition-all duration-300`}
+                className={`px-2 sm:px-6 lg:px-8 ${isScrolled ? "bg-gray-300 bg-opacity-90 shadow-md" : "bg-gray-200"} transition-all duration-300`}
             >
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

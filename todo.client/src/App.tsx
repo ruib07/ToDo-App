@@ -8,13 +8,13 @@ import NotFound from "./pages/404";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 
+import Tasks from "./pages/Tasks";
 import TaskCreation from "./components/Tasks/CreateTask";
-import TaskDetails from "./components/Tasks/TaskDetails";
 
 export default function App() {
     return (
         <Router>
-            <div className="flex flex-col min-h-screen bg-gray-100">
+            <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-200">
                 <ToastContainer />
 
                 <div className="flex-grow container mx-auto">
@@ -25,8 +25,8 @@ export default function App() {
                         <Route path="/Authentication/Signup" element={<Signup />} />
                         <Route path="/Authentication/Signin" element={<Signin />} />
 
+                        <Route path="/Tasks" element={<Tasks /> } />
                         <Route path="/Task/Create" element={<TaskCreation />} />
-                        <Route path="/Task/:taskId" element={<TaskDetails />} />
                     </Routes>
                 </div>
             </div>
