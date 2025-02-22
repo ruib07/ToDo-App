@@ -1,9 +1,9 @@
 To run this project, you have to complete the following steps:
 
 - Create a .env file on the frontend with the following items:
--  VITE_API_BASE_URL to your backend url;
--   DEV_SERVER_PORT with your frontend port;
--   VITE_API_VERSION with the version of your API.
+  -  VITE_API_BASE_URL to your backend url;
+  -   DEV_SERVER_PORT with your frontend port;
+  -   VITE_API_VERSION with the version of your API.
 
 - Create the database following these steps:
   - Delete Migrations folder
