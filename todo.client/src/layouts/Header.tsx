@@ -88,7 +88,9 @@ export default function Header() {
                         </div>
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-4">
-                                {navigation.map((item) => (
+                                {navigation
+                                    .filter(item => !item.requiresAuth || userData)
+                                    .map((item) => (
                                     <a
                                         key={item.name}
                                         href={item.href}
@@ -116,10 +118,10 @@ export default function Header() {
                                 <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-200 py-1 shadow-lg ring-1 ring-gray-300 ring-opacity-5 focus:outline-none">
                                     <MenuItem>
                                         <a
-                                            href="/MyInfo"
+                                            href="/Profile"
                                             className="block hover:bg-gray-300 px-4 py-2 text-md text-gray-800"
                                         >
-                                            Your Profile
+                                            My Profile
                                         </a>
                                     </MenuItem>
                                     <MenuItem>
@@ -134,13 +136,13 @@ export default function Header() {
                             </Menu>
                         ) : (
                             <Menu as="div" className="relative ml-3">
-                                <MenuButton className="text-white text-sm cursor-pointer">
+                                <MenuButton className="text-gray-900 text-md cursor-pointer">
                                     Authentication
                                 </MenuButton>
-                                <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-1 shadow-lg ring-1 ring-gray-600 ring-opacity-5 focus:outline-none">
+                                    <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-200 py-1 shadow-lg ring-1 ring-gray-300 ring-opacity-5 focus:outline-none">
                                     <MenuItem>
                                         <a
-                                            href="/Authentication/Login"
+                                                href="/Authentication/Signin"
                                             className="block hover:bg-gray-300 px-4 py-2 text-md text-gray-800"
                                         >
                                             Login
@@ -148,7 +150,7 @@ export default function Header() {
                                     </MenuItem>
                                     <MenuItem>
                                         <a
-                                            href="/Authentication/Registration"
+                                                href="/Authentication/Signup"
                                             className="block hover:bg-gray-300 px-4 py-2 text-md text-gray-800"
                                         >
                                             Registration

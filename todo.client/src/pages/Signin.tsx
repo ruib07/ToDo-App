@@ -47,7 +47,7 @@ export default function Signin() {
     return (
         <div className="flex min-h-full flex-1 justify-center px-6 py-12 lg:px-8">
             <div className="relative w-full max-w-lg">
-                <img alt="SkillSwap" src={Img} className="mx-auto h-12 w-auto" /><br />
+                <img alt="ToDo" src={Img} className="mx-auto h-12 w-auto" /><br />
 
                 <div className="w-full bg-gray-200 max-w-lg border border-gray-300 rounded-lg shadow">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -90,7 +90,7 @@ export default function Signin() {
 
                             <div className="flex items-center justify-between">
                                 <div className="flex items-start">
-                                    <div className="ml-3 text-sm">
+                                    <div className="ml-3 text-md">
                                         <label className="text-gray-900">Remember me</label>
                                     </div>
                                     <div className="ms-2 flex items-center h-5">
@@ -103,12 +103,6 @@ export default function Signin() {
                                         />
                                     </div>
                                 </div>
-                                <a
-                                    href="/RecoverPassword/SendEmail"
-                                    className="font-semibold text-orange-500 hover:underline"
-                                >
-                                    Forgot password?
-                                </a>
                             </div>
 
 

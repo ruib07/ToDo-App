@@ -17,8 +17,6 @@ public class TasksService
     {
         var tasksByUser = await _tasksRepository.GetTasksByUser(userId);
 
-        if (tasksByUser == null || tasksByUser.Count == 0) throw new Exception("No Tasks found for this user.");
-
         return tasksByUser;
     }
 

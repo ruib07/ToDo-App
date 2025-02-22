@@ -1,12 +1,10 @@
 export enum TasksStatus {
     Pending = 0,
-    InProgress = 1,
-    Completed = 2
+    Completed = 1
 }
 
 export const tasksStatusMap: { [key: number]: string } = {
     [TasksStatus.Pending]: "Pending",
-    [TasksStatus.InProgress]: "InProgress",
     [TasksStatus.Completed]: "Completed"
 };
 

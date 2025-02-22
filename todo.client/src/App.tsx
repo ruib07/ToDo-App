@@ -11,6 +11,8 @@ import Signin from "./pages/Signin";
 import Tasks from "./pages/Tasks";
 import TaskCreation from "./components/Tasks/CreateTask";
 
+import Profile from "./pages/UserProfile";
+
 export default function App() {
     return (
         <Router>
@@ -27,6 +29,8 @@ export default function App() {
 
                         <Route path="/Tasks" element={<Tasks /> } />
                         <Route path="/Task/Create" element={<TaskCreation />} />
+
+                        <Route path="/Profile" element={<Profile /> } />
                     </Routes>
                 </div>
             </div>
