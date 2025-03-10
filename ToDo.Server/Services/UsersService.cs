@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System.Security.Cryptography;
+﻿using ToDo.Server.Helpers;
 using ToDo.Server.Models;
 using ToDo.Server.Repositories.Interfaces;
 
@@ -27,7 +26,7 @@ public class UsersService
 
         if (existingUser != null) throw new Exception("Email already exists!");
 
-        user.Password = HashPassword(user.Password);
+        user.Password = PasswordHasherHelper.HashPassword(user.Password);
 
         return await _usersRepository.CreateUser(user);
     }
@@ -38,7 +37,7 @@ public class UsersService
 
         currentUser.Name = updateUser.Name;
         currentUser.Email = updateUser.Email;
-        currentUser.Password = HashPassword(updateUser.Password);
+        currentUser.Password = PasswordHasherHelper.HashPassword(updateUser.Password);
 
         await _usersRepository.UpdateUser(currentUser);
         return currentUser;
@@ -48,29 +47,4 @@ public class UsersService
     {
         await _usersRepository.DeleteUser(userId);
     }
-
-    #region Private Methods
-
-    private static string HashPassword(string password)
-    {
-        byte[] salt = new byte[16];
-        using (var rng = RandomNumberGenerator.Create())
-        {
-            rng.GetBytes(salt);
-        }
-
-        byte[] hash = KeyDerivation.Pbkdf2(
-            password: password,
-            salt: salt,
-            prf: KeyDerivationPrf.HMACSHA256,
-            iterationCount: 10000,
-            numBytesRequested: 32);
-
-        byte[] hashBytes = new byte[16 + 32];
-        Array.Copy(salt, 0, hashBytes, 0, 16);
-        Array.Copy(hash, 0, hashBytes, 16, 32);
-        return Convert.ToBase64String(hashBytes);
-    }
-
-    #endregion
 }
